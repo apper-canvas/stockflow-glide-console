@@ -1,9 +1,12 @@
-import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import ApperIcon from '../components/ApperIcon'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
+import PropTypes from 'prop-types';
 
-const NotFound = () => {
-  const navigate = useNavigate()
+const NotFoundPage = () => {
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -27,29 +30,33 @@ const NotFound = () => {
         </p>
         
         <div className="space-y-4">
-          <motion.button
+          <Button
+            onClick={() => navigate('/dashboard')}
+            className="w-full bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/dashboard')}
-            className="w-full px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center space-x-2"
           >
             <ApperIcon name="Home" size={20} />
             <span>Go to Dashboard</span>
-          </motion.button>
+          </Button>
           
-          <motion.button
+          <Button
+            onClick={() => navigate(-1)}
+            className="w-full text-gray-700 bg-gray-200 hover:bg-gray-300 flex items-center justify-center space-x-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate(-1)}
-            className="w-full px-6 py-3 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors flex items-center justify-center space-x-2"
           >
             <ApperIcon name="ArrowLeft" size={20} />
             <span>Go Back</span>
-          </motion.button>
+          </Button>
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default NotFound
+NotFoundPage.propTypes = {
+  // No direct props, uses useNavigate
+};
+
+export default NotFoundPage;

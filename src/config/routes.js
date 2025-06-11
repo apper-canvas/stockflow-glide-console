@@ -1,9 +1,9 @@
-import Dashboard from '../pages/Dashboard'
-import Inventory from '../pages/Inventory'
-import PurchaseOrders from '../pages/PurchaseOrders'
-import SalesOrders from '../pages/SalesOrders'
-import Reports from '../pages/Reports'
-import Settings from '../pages/Settings'
+import DashboardPage from '@/components/pages/DashboardPage'
+import InventoryPage from '@/components/pages/InventoryPage'
+import PurchaseOrdersPage from '@/components/pages/PurchaseOrdersPage'
+import SalesOrdersPage from '@/components/pages/SalesOrdersPage'
+import ReportsPage from '@/components/pages/ReportsPage'
+import SettingsPage from '@/components/pages/SettingsPage'
 
 export const routes = {
   dashboard: {
@@ -11,42 +11,42 @@ export const routes = {
     label: 'Dashboard',
     path: '/dashboard',
     icon: 'LayoutDashboard',
-    component: Dashboard
+component: DashboardPage
   },
   inventory: {
     id: 'inventory',
     label: 'Inventory',
     path: '/inventory',
     icon: 'Package',
-    component: Inventory
+component: InventoryPage
   },
   purchaseOrders: {
     id: 'purchaseOrders',
     label: 'Purchase Orders',
     path: '/purchase-orders',
     icon: 'ShoppingCart',
-    component: PurchaseOrders
+component: PurchaseOrdersPage
   },
   salesOrders: {
     id: 'salesOrders',
     label: 'Sales Orders',
     path: '/sales-orders',
     icon: 'ShoppingBag',
-    component: SalesOrders
+component: SalesOrdersPage
   },
   reports: {
     id: 'reports',
     label: 'Reports',
     path: '/reports',
     icon: 'BarChart3',
-    component: Reports
+component: ReportsPage
   },
   settings: {
     id: 'settings',
     label: 'Settings',
     path: '/settings',
     icon: 'Settings',
-    component: Settings
+component: SettingsPage
   }
 }
 

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "prod-001",
+    "sku": "WH-LAPTOP-001",
+    "name": "Professional Laptop Computer",
+    "description": "High-performance business laptop with 16GB RAM and 512GB SSD storage",
+    "category": "Electronics",
+    "unitPrice": 1299.99,
+    "unit": "pcs",
+    "reorderPoint": 5,
+    "reorderQuantity": 20,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "updatedAt": "2024-01-20T14:30:00Z"
+  },
+  {
+    "id": "prod-002",
+    "sku": "WH-PHONE-002",
+    "name": "Enterprise Smartphone",
+    "description": "Business-grade smartphone with enhanced security features",
+    "category": "Electronics",
+    "unitPrice": 799.99,
+    "unit": "pcs",
+    "reorderPoint": 10,
+    "reorderQuantity": 50,
+    "createdAt": "2024-01-16T11:00:00Z",
+    "updatedAt": "2024-01-21T15:45:00Z"
+  },
+  {
+    "id": "prod-003",
+    "sku": "WH-DESK-003",
+    "name": "Executive Office Desk",
+    "description": "Premium wooden executive desk with built-in cable management",
+    "category": "Furniture",
+    "unitPrice": 899.99,
+    "unit": "pcs",
+    "reorderPoint": 3,
+    "reorderQuantity": 10,
+    "createdAt": "2024-01-17T12:00:00Z",
+    "updatedAt": "2024-01-22T09:15:00Z"
+  },
+  {
+    "id": "prod-004",
+    "sku": "WH-CHAIR-004",
+    "name": "Ergonomic Office Chair",
+    "description": "Premium ergonomic chair with lumbar support and adjustable height",
+    "category": "Furniture",
+    "unitPrice": 399.99,
+    "unit": "pcs",
+    "reorderPoint": 8,
+    "reorderQuantity": 25,
+    "createdAt": "2024-01-18T13:00:00Z",
+    "updatedAt": "2024-01-23T16:20:00Z"
+  },
+  {
+    "id": "prod-005",
+    "sku": "WH-PRINT-005",
+    "name": "Multi-Function Printer",
+    "description": "All-in-one printer with scanning, copying, and wireless connectivity",
+    "category": "Electronics",
+    "unitPrice": 299.99,
+    "unit": "pcs",
+    "reorderPoint": 4,
+    "reorderQuantity": 15,
+    "createdAt": "2024-01-19T14:00:00Z",
+    "updatedAt": "2024-01-24T11:30:00Z"
+  }
+]

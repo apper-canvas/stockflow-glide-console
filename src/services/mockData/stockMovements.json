@@ -1,0 +1,79 @@
+[
+  {
+    "id": "mov-001",
+    "type": "receipt",
+    "productId": "prod-002",
+    "quantity": 50,
+    "fromLocation": "Supplier Dock",
+    "toLocation": "Warehouse-Main-A1",
+    "orderId": "order-001",
+    "timestamp": "2024-01-24T08:30:00Z",
+    "notes": "Received shipment from TechSupplier Inc."
+  },
+  {
+    "id": "mov-002",
+    "type": "shipment",
+    "productId": "prod-004",
+    "quantity": 10,
+    "fromLocation": "Warehouse-Main-B2",
+    "toLocation": "Customer Loading",
+    "orderId": "order-002",
+    "timestamp": "2024-01-23T15:45:00Z",
+    "notes": "Shipped to Corporate Customer"
+  },
+  {
+    "id": "mov-003",
+    "type": "transfer",
+    "productId": "prod-003",
+    "quantity": 5,
+    "fromLocation": "Warehouse-Main-C1",
+    "toLocation": "Warehouse-Main-C2",
+    "orderId": null,
+    "timestamp": "2024-01-22T10:15:00Z",
+    "notes": "Internal reorganization"
+  },
+  {
+    "id": "mov-004",
+    "type": "adjustment",
+    "productId": "prod-001",
+    "quantity": -1,
+    "fromLocation": "Warehouse-Main-A1",
+    "toLocation": null,
+    "orderId": null,
+    "timestamp": "2024-01-21T14:20:00Z",
+    "notes": "Damaged unit - quality control rejection"
+  },
+  {
+    "id": "mov-005",
+    "type": "receipt",
+    "productId": "prod-005",
+    "quantity": 15,
+    "fromLocation": "Supplier Dock",
+    "toLocation": "Warehouse-Main-D1",
+    "orderId": "order-003",
+    "timestamp": "2024-01-20T09:00:00Z",
+    "notes": "Received printer shipment"
+  },
+  {
+    "id": "mov-006",
+    "type": "shipment",
+    "productId": "prod-002",
+    "quantity": 3,
+    "fromLocation": "Warehouse-Main-A1",
+    "toLocation": "Customer Pickup",
+    "orderId": "order-004",
+    "timestamp": "2024-01-19T16:30:00Z",
+    "notes": "Customer pickup completed"
+  },
+  {
+    "id": "mov-007",
+    "type": "adjustment",
+    "productId": "prod-003",
+    "quantity": 2,
+    "fromLocation": null,
+    "toLocation": "Warehouse-Main-C1",
+    "orderId": null,
+    "timestamp": "2024-01-18T11:45:00Z",
+    "notes": "Found additional units during inventory count"
+  }
+]

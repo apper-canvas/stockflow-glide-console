@@ -1,0 +1,232 @@
+[
+  {
+    "id": 1,
+    "name": "Global Electronics Supplier",
+    "companyType": "Electronics",
+    "email": "contact@globalelectronics.com",
+    "phone": "+1-555-0123",
+    "website": "https://globalelectronics.com",
+    "taxId": "12-3456789",
+    "status": "active",
+    "address": {
+      "street": "123 Tech Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94105",
+      "country": "USA"
+    },
+    "primaryContact": {
+      "name": "John Smith",
+      "title": "Sales Manager",
+      "email": "john.smith@globalelectronics.com",
+      "phone": "+1-555-0124"
+    },
+    "rating": {
+      "overall": 4.5,
+      "delivery": 4.8,
+      "quality": 4.2,
+      "pricing": 4.5,
+      "communication": 4.6
+    },
+    "kpis": {
+      "avgDeliveryTime": 3.2,
+      "onTimeDeliveryRate": 95,
+      "qualityScore": 4.2,
+      "priceCompetitiveness": 4.5,
+      "responseTime": 2.1
+    },
+    "paymentTerms": "Net 30",
+    "currency": "USD",
+    "minimumOrder": 1000,
+    "leadTime": 7,
+    "certifications": ["ISO 9001", "ISO 14001"],
+    "categories": ["Electronics", "Components", "Semiconductors"],
+    "notes": "Reliable supplier with excellent quality control",
+    "createdAt": "2024-01-15T08:30:00Z",
+    "updatedAt": "2024-12-01T10:15:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Industrial Materials Corp",
+    "companyType": "Manufacturing",
+    "email": "orders@industrialmaterials.com",
+    "phone": "+1-555-0234",
+    "website": "https://industrialmaterials.com",
+    "taxId": "23-4567890",
+    "status": "active",
+    "address": {
+      "street": "456 Industrial Blvd",
+      "city": "Detroit",
+      "state": "MI",
+      "zipCode": "48201",
+      "country": "USA"
+    },
+    "primaryContact": {
+      "name": "Sarah Johnson",
+      "title": "Account Manager",
+      "email": "sarah.johnson@industrialmaterials.com",
+      "phone": "+1-555-0235"
+    },
+    "rating": {
+      "overall": 4.2,
+      "delivery": 4.0,
+      "quality": 4.5,
+      "pricing": 3.8,
+      "communication": 4.3
+    },
+    "kpis": {
+      "avgDeliveryTime": 5.1,
+      "onTimeDeliveryRate": 88,
+      "qualityScore": 4.5,
+      "priceCompetitiveness": 3.8,
+      "responseTime": 3.2
+    },
+    "paymentTerms": "Net 45",
+    "currency": "USD",
+    "minimumOrder": 2500,
+    "leadTime": 14,
+    "certifications": ["ISO 9001", "AS9100"],
+    "categories": ["Raw Materials", "Steel", "Aluminum"],
+    "notes": "Good quality materials, competitive pricing",
+    "createdAt": "2024-02-20T09:45:00Z",
+    "updatedAt": "2024-11-28T14:22:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Tech Components Ltd",
+    "companyType": "Technology",
+    "email": "sales@techcomponents.co.uk",
+    "phone": "+44-20-1234-5678",
+    "website": "https://techcomponents.co.uk",
+    "taxId": "GB123456789",
+    "status": "active",
+    "address": {
+      "street": "789 Innovation Park",
+      "city": "London",
+      "state": "England",
+      "zipCode": "SW1A 1AA",
+      "country": "United Kingdom"
+    },
+    "primaryContact": {
+      "name": "David Wilson",
+      "title": "Business Development",
+      "email": "david.wilson@techcomponents.co.uk",
+      "phone": "+44-20-1234-5679"
+    },
+    "rating": {
+      "overall": 4.7,
+      "delivery": 4.9,
+      "quality": 4.6,
+      "pricing": 4.4,
+      "communication": 4.8
+    },
+    "kpis": {
+      "avgDeliveryTime": 2.8,
+      "onTimeDeliveryRate": 97,
+      "qualityScore": 4.6,
+      "priceCompetitiveness": 4.4,
+      "responseTime": 1.8
+    },
+    "paymentTerms": "Net 30",
+    "currency": "GBP",
+    "minimumOrder": 500,
+    "leadTime": 5,
+    "certifications": ["ISO 9001", "CE", "ROHS"],
+    "categories": ["Electronic Components", "Sensors", "Microcontrollers"],
+    "notes": "Excellent European supplier with fast delivery",
+    "createdAt": "2024-03-10T11:20:00Z",
+    "updatedAt": "2024-12-02T16:30:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Pacific Logistics Co",
+    "companyType": "Logistics",
+    "email": "info@pacificlogistics.com",
+    "phone": "+1-555-0345",
+    "website": "https://pacificlogistics.com",
+    "taxId": "34-5678901",
+    "status": "inactive",
+    "address": {
+      "street": "321 Harbor Drive",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90210",
+      "country": "USA"
+    },
+    "primaryContact": {
+      "name": "Michael Chen",
+      "title": "Operations Manager",
+      "email": "michael.chen@pacificlogistics.com",
+      "phone": "+1-555-0346"
+    },
+    "rating": {
+      "overall": 3.2,
+      "delivery": 2.8,
+      "quality": 3.5,
+      "pricing": 3.0,
+      "communication": 3.5
+    },
+    "kpis": {
+      "avgDeliveryTime": 8.5,
+      "onTimeDeliveryRate": 72,
+      "qualityScore": 3.5,
+      "priceCompetitiveness": 3.0,
+      "responseTime": 4.8
+    },
+    "paymentTerms": "Net 60",
+    "currency": "USD",
+    "minimumOrder": 5000,
+    "leadTime": 21,
+    "certifications": ["ISO 9001"],
+    "categories": ["Logistics", "Warehousing", "Distribution"],
+    "notes": "Currently inactive due to performance issues",
+    "createdAt": "2024-01-05T07:15:00Z",
+    "updatedAt": "2024-10-15T13:45:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Quality Plastics Inc",
+    "companyType": "Manufacturing",
+    "email": "orders@qualityplastics.com",
+    "phone": "+1-555-0456",
+    "website": "https://qualityplastics.com",
+    "taxId": "45-6789012",
+    "status": "active",
+    "address": {
+      "street": "654 Manufacturing Way",
+      "city": "Houston",
+      "state": "TX",
+      "zipCode": "77001",
+      "country": "USA"
+    },
+    "primaryContact": {
+      "name": "Lisa Anderson",
+      "title": "Sales Director",
+      "email": "lisa.anderson@qualityplastics.com",
+      "phone": "+1-555-0457"
+    },
+    "rating": {
+      "overall": 4.3,
+      "delivery": 4.1,
+      "quality": 4.7,
+      "pricing": 4.0,
+      "communication": 4.2
+    },
+    "kpis": {
+      "avgDeliveryTime": 4.5,
+      "onTimeDeliveryRate": 91,
+      "qualityScore": 4.7,
+      "priceCompetitiveness": 4.0,
+      "responseTime": 2.8
+    },
+    "paymentTerms": "Net 30",
+    "currency": "USD",
+    "minimumOrder": 1500,
+    "leadTime": 10,
+    "certifications": ["ISO 9001", "FDA", "NSF"],
+    "categories": ["Plastics", "Polymers", "Custom Molding"],
+    "notes": "High-quality plastic components with excellent consistency",
+    "createdAt": "2024-04-12T12:00:00Z",
+    "updatedAt": "2024-11-30T09:20:00Z"
+  }
+]

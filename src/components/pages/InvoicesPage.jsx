@@ -142,13 +142,13 @@ function InvoicesPage() {
 
   return (
     <div className="space-y-6">
-      <SectionHeader
+<SectionHeader
         title="Invoices"
         subtitle="Manage customer invoices and billing"
         action={
           <Button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500"
           >
             <ApperIcon name="Plus" size={16} />
             Create Invoice

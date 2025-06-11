@@ -3,6 +3,7 @@ import FormField from '@/components/molecules/FormField';
 import Input from '@/components/atoms/Input';
 import Select from '@/components/atoms/Select';
 import Button from '@/components/atoms/Button';
+import Label from '@/components/atoms/Label';
 import ApperIcon from '@/components/ApperIcon';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
@@ -36,13 +37,13 @@ const CreateSalesOrderForm = ({ products, onSave, onClose }) => {
       )
     }));
     
-    if (field === 'productId') {
-      const product = products.find(p => p.id === value);
+if (field === 'productId') {
+      const product = products?.find(p => p?.id === value);
       if (product) {
         setFormData(prev => ({
           ...prev,
           items: prev.items.map((item, i) =>
-            i === index ? { 
+            i === index ? {
               ...item, 
               productId: value,
               productName: product.name,
@@ -54,13 +55,34 @@ const CreateSalesOrderForm = ({ products, onSave, onClose }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.items.length === 0 || !formData.customerId) {
-      toast.error('Please fill in all required fields');
+    
+    if (!formData.customerId?.trim()) {
+      toast.error('Customer ID is required');
       return;
     }
-    onSave(formData);
+    
+    if (formData.items.length === 0) {
+      toast.error('At least one item is required');
+      return;
+    }
+    
+    const hasInvalidItems = formData.items.some(item => 
+      !item.productId || item.quantity <= 0 || item.unitPrice < 0
+    );
+    
+    if (hasInvalidItems) {
+      toast.error('Please ensure all items have valid product, quantity, and price');
+      return;
+    }
+    
+    try {
+      onSave(formData);
+    } catch (error) {
+      toast.error('Failed to create order. Please try again.');
+      console.error('Order creation error:', error);
+    }
   };
 
   const totalOrderValue = formData.items.reduce((total, item) => total + (item.quantity * (item.unitPrice || 0)), 0);
@@ -100,11 +122,11 @@ const CreateSalesOrderForm = ({ products, onSave, onClose }) => {
                     value={item.productId}
                     onChange={(e) => handleItemChange(index, 'productId', e.target.value)}
                     required
-                  >
+>
                     <option value="">Select Product</option>
-                    {products.map(product => (
-                      <option key={product.id} value={product.id}>
-                        {product.name} ({product.sku})
+                    {products?.map(product => (
+                      <option key={product?.id} value={product?.id}>
+                        {product?.name} ({product?.sku})
                       </option>
                     ))}
                   </Select>

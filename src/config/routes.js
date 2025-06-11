@@ -2,6 +2,7 @@ import DashboardPage from '@/components/pages/DashboardPage'
 import InventoryPage from '@/components/pages/InventoryPage'
 import PurchaseOrdersPage from '@/components/pages/PurchaseOrdersPage'
 import SalesOrdersPage from '@/components/pages/SalesOrdersPage'
+import InvoicesPage from '@/components/pages/InvoicesPage'
 import SuppliersPage from '@/components/pages/SuppliersPage'
 import ReportsPage from '@/components/pages/ReportsPage'
 import SettingsPage from '@/components/pages/SettingsPage'
@@ -34,6 +35,13 @@ salesOrders: {
     path: '/sales-orders',
     icon: 'ShoppingBag',
     component: SalesOrdersPage
+  },
+  invoices: {
+    id: 'invoices',
+    label: 'Invoices',
+    path: '/invoices',
+    icon: 'FileText',
+    component: InvoicesPage
   },
   suppliers: {
     id: 'suppliers',

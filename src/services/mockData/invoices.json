@@ -1,0 +1,109 @@
+[
+  {
+    "id": "1",
+    "invoiceNumber": "INV-001234",
+    "customerName": "Acme Corporation",
+    "customerEmail": "billing@acme.com",
+    "issueDate": "2024-01-15",
+    "dueDate": "2024-02-14",
+    "status": "paid",
+    "items": [
+      {
+        "id": "1",
+        "productName": "Widget A",
+        "quantity": 10,
+        "unitPrice": 25.99,
+        "total": 259.90
+      },
+      {
+        "id": "2",
+        "productName": "Widget B",
+        "quantity": 5,
+        "unitPrice": 45.50,
+        "total": 227.50
+      }
+    ],
+    "subtotal": 487.40,
+    "taxRate": 8.5,
+    "taxAmount": 41.43,
+    "totalAmount": 528.83,
+    "notes": "Payment terms: Net 30 days",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-20T14:45:00Z"
+  },
+  {
+    "id": "2",
+    "invoiceNumber": "INV-001235",
+    "customerName": "TechStart Solutions",
+    "customerEmail": "accounts@techstart.com",
+    "issueDate": "2024-01-18",
+    "dueDate": "2024-02-17",
+    "status": "pending",
+    "items": [
+      {
+        "id": "3",
+        "productName": "Pro Tool Set",
+        "quantity": 3,
+        "unitPrice": 150.00,
+        "total": 450.00
+      }
+    ],
+    "subtotal": 450.00,
+    "taxRate": 8.5,
+    "taxAmount": 38.25,
+    "totalAmount": 488.25,
+    "notes": "",
+    "createdAt": "2024-01-18T09:15:00Z",
+    "updatedAt": "2024-01-18T09:15:00Z"
+  },
+  {
+    "id": "3",
+    "invoiceNumber": "INV-001236",
+    "customerName": "Global Industries",
+    "customerEmail": "finance@global.com",
+    "issueDate": "2024-01-20",
+    "dueDate": "2024-02-19",
+    "status": "overdue",
+    "items": [
+      {
+        "id": "4",
+        "productName": "Premium Package",
+        "quantity": 1,
+        "unitPrice": 999.99,
+        "total": 999.99
+      }
+    ],
+    "subtotal": 999.99,
+    "taxRate": 8.5,
+    "taxAmount": 85.00,
+    "totalAmount": 1084.99,
+    "notes": "Bulk discount applied",
+    "createdAt": "2024-01-20T11:20:00Z",
+    "updatedAt": "2024-01-20T11:20:00Z"
+  },
+  {
+    "id": "4",
+    "invoiceNumber": "INV-001237",
+    "customerName": "SmallBiz LLC",
+    "customerEmail": "owner@smallbiz.com",
+    "issueDate": "2024-01-22",
+    "dueDate": "2024-02-21",
+    "status": "draft",
+    "items": [
+      {
+        "id": "5",
+        "productName": "Starter Kit",
+        "quantity": 2,
+        "unitPrice": 75.00,
+        "total": 150.00
+      }
+    ],
+    "subtotal": 150.00,
+    "taxRate": 8.5,
+    "taxAmount": 12.75,
+    "totalAmount": 162.75,
+    "notes": "First-time customer discount",
+    "createdAt": "2024-01-22T16:10:00Z",
+    "updatedAt": "2024-01-22T16:10:00Z"
+  }
+]

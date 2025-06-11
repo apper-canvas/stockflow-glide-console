@@ -3,6 +3,7 @@ import FormField from '@/components/molecules/FormField';
 import Input from '@/components/atoms/Input';
 import Select from '@/components/atoms/Select';
 import Button from '@/components/atoms/Button';
+import Label from '@/components/atoms/Label';
 import ApperIcon from '@/components/ApperIcon';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
@@ -36,13 +37,13 @@ const CreatePurchaseOrderForm = ({ products, onSave, onClose }) => {
       )
     }));
     
-    // Auto-fill product name and price when product is selected
+// Auto-fill product name and price when product is selected
     if (field === 'productId') {
-      const product = products.find(p => p.id === value);
+      const product = products?.find(p => p.id === value);
       if (product) {
         setFormData(prev => ({
           ...prev,
-          items: prev.items.map((item, i) => 
+          items: prev.items.map((item, i) =>
             i === index ? { 
               ...item, 
               productId: value,
@@ -55,12 +56,23 @@ const CreatePurchaseOrderForm = ({ products, onSave, onClose }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.items.length === 0 || !formData.supplierId) {
       toast.error('Please fill in all required fields');
       return;
     }
+    
+    // Validate that all items have required fields
+    const invalidItems = formData.items.some(item => 
+      !item.productId || item.quantity <= 0 || item.unitPrice <= 0
+    );
+    
+    if (invalidItems) {
+      toast.error('Please complete all item details');
+      return;
+    }
+    
     onSave(formData);
   };
 
@@ -99,9 +111,9 @@ const CreatePurchaseOrderForm = ({ products, onSave, onClose }) => {
                     value={item.productId}
                     onChange={(e) => handleItemChange(index, 'productId', e.target.value)}
                     required
-                  >
+>
                     <option value="">Select Product</option>
-                    {products.map(product => (
+                    {products?.map(product => (
                       <option key={product.id} value={product.id}>
                         {product.name} ({product.sku})
                       </option>

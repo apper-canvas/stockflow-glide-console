@@ -4,6 +4,7 @@
     "invoiceNumber": "INV-001234",
     "customerName": "Acme Corporation",
     "customerEmail": "billing@acme.com",
+    "customerAddress": "123 Business Ave, Suite 100, New York, NY 10001",
     "issueDate": "2024-01-15",
     "dueDate": "2024-02-14",
     "status": "paid",
@@ -11,15 +12,21 @@
       {
         "id": "1",
         "productName": "Widget A",
+        "description": "High-quality widget for industrial use",
         "quantity": 10,
         "unitPrice": 25.99,
+        "discount": 5.0,
+        "taxRate": 8.5,
         "total": 259.90
       },
       {
         "id": "2",
         "productName": "Widget B",
+        "description": "Premium widget with extended warranty",
         "quantity": 5,
         "unitPrice": 45.50,
+        "discount": 0.0,
+        "taxRate": 8.5,
         "total": 227.50
       }
     ],
@@ -36,6 +43,7 @@
     "invoiceNumber": "INV-001235",
     "customerName": "TechStart Solutions",
     "customerEmail": "accounts@techstart.com",
+    "customerAddress": "456 Tech Park Dr, Building 2, Austin, TX 78701",
     "issueDate": "2024-01-18",
     "dueDate": "2024-02-17",
     "status": "pending",
@@ -43,8 +51,11 @@
       {
         "id": "3",
         "productName": "Pro Tool Set",
+        "description": "Professional grade tool set with carrying case",
         "quantity": 3,
         "unitPrice": 150.00,
+        "discount": 10.0,
+        "taxRate": 8.5,
         "total": 450.00
       }
     ],
@@ -61,6 +72,7 @@
     "invoiceNumber": "INV-001236",
     "customerName": "Global Industries",
     "customerEmail": "finance@global.com",
+    "customerAddress": "789 Industrial Blvd, Manufacturing District, Chicago, IL 60601",
     "issueDate": "2024-01-20",
     "dueDate": "2024-02-19",
     "status": "overdue",
@@ -68,8 +80,11 @@
       {
         "id": "4",
         "productName": "Premium Package",
+        "description": "Comprehensive solution package with support",
         "quantity": 1,
         "unitPrice": 999.99,
+        "discount": 15.0,
+        "taxRate": 8.5,
         "total": 999.99
       }
     ],
@@ -86,6 +101,7 @@
     "invoiceNumber": "INV-001237",
     "customerName": "SmallBiz LLC",
     "customerEmail": "owner@smallbiz.com",
+    "customerAddress": "321 Main Street, Downtown, Portland, OR 97201",
     "issueDate": "2024-01-22",
     "dueDate": "2024-02-21",
     "status": "draft",
@@ -93,8 +109,11 @@
       {
         "id": "5",
         "productName": "Starter Kit",
+        "description": "Basic starter package for new businesses",
         "quantity": 2,
         "unitPrice": 75.00,
+        "discount": 20.0,
+        "taxRate": 8.5,
         "total": 150.00
       }
     ],

@@ -21,9 +21,9 @@ const invoiceService = {
   async create(invoiceData) {
     await new Promise(resolve => setTimeout(resolve, 400))
     
-    const newInvoice = {
+const newInvoice = {
       id: Date.now().toString(),
-      invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
+      invoiceNumber: invoiceData.invoiceNumber || `INV-${Date.now().toString().slice(-6)}`,
       ...invoiceData,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()

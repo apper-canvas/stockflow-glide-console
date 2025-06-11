@@ -6,13 +6,15 @@ import Button from '@/components/atoms/Button'
 import ApperIcon from '@/components/ApperIcon'
 
 function CreateInvoiceForm({ onSubmit, onCancel }) {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
+    invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
     customerName: '',
     customerEmail: '',
+    customerAddress: '',
     issueDate: new Date().toISOString().split('T')[0],
     dueDate: '',
     status: 'draft',
-    items: [{ productName: '', quantity: 1, unitPrice: 0 }],
+    items: [{ productName: '', description: '', quantity: 1, unitPrice: 0, discount: 0, taxRate: 8.5 }],
     taxRate: 8.5,
     notes: ''
   })
@@ -24,11 +26,13 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
     }))
   }
 
-  const handleItemChange = (index, field, value) => {
+const handleItemChange = (index, field, value) => {
     const newItems = [...formData.items]
     newItems[index] = {
       ...newItems[index],
-      [field]: field === 'quantity' || field === 'unitPrice' ? parseFloat(value) || 0 : value
+      [field]: field === 'quantity' || field === 'unitPrice' || field === 'discount' || field === 'taxRate' 
+        ? parseFloat(value) || 0 
+        : value
     }
     setFormData(prev => ({
       ...prev,
@@ -36,10 +40,10 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
     }))
   }
 
-  const addItem = () => {
+const addItem = () => {
     setFormData(prev => ({
       ...prev,
-      items: [...prev.items, { productName: '', quantity: 1, unitPrice: 0 }]
+      items: [...prev.items, { productName: '', description: '', quantity: 1, unitPrice: 0, discount: 0, taxRate: 8.5 }]
     }))
   }
 
@@ -52,12 +56,20 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
     }
   }
 
-  const calculateTotals = () => {
+const calculateTotals = () => {
     const subtotal = formData.items.reduce((sum, item) => {
-      return sum + (item.quantity * item.unitPrice)
+      const lineTotal = item.quantity * item.unitPrice
+      const discountAmount = lineTotal * (item.discount / 100)
+      return sum + (lineTotal - discountAmount)
     }, 0)
     
-    const taxAmount = subtotal * (formData.taxRate / 100)
+    const taxAmount = formData.items.reduce((sum, item) => {
+      const lineTotal = item.quantity * item.unitPrice
+      const discountAmount = lineTotal * (item.discount / 100)
+      const taxableAmount = lineTotal - discountAmount
+      return sum + (taxableAmount * (item.taxRate / 100))
+    }, 0)
+    
     const totalAmount = subtotal + taxAmount
 
     return { subtotal, taxAmount, totalAmount }
@@ -68,11 +80,19 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    const processedItems = formData.items.map((item, index) => ({
-      id: (index + 1).toString(),
-      ...item,
-      total: item.quantity * item.unitPrice
-    }))
+const processedItems = formData.items.map((item, index) => {
+      const lineTotal = item.quantity * item.unitPrice
+      const discountAmount = lineTotal * (item.discount / 100)
+      const taxableAmount = lineTotal - discountAmount
+      const itemTaxAmount = taxableAmount * (item.taxRate / 100)
+      const total = taxableAmount + itemTaxAmount
+      
+      return {
+        id: (index + 1).toString(),
+        ...item,
+        total
+      }
+    })
 
     const invoiceData = {
       ...formData,
@@ -86,8 +106,32 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+<form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FormField label="Invoice Number" id="invoiceNumber" required>
+          <Input
+            id="invoiceNumber"
+            type="text"
+            value={formData.invoiceNumber}
+            onChange={(e) => handleInputChange('invoiceNumber', e.target.value)}
+            placeholder="Enter invoice number"
+            required
+          />
+        </FormField>
+
+        <FormField label="Status" id="status">
+          <Select
+            id="status"
+            value={formData.status}
+            onChange={(e) => handleInputChange('status', e.target.value)}
+          >
+            <option value="draft">Draft</option>
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+            <option value="overdue">Overdue</option>
+          </Select>
+        </FormField>
+
         <FormField label="Customer Name" id="customerName" required>
           <Input
             id="customerName"
@@ -110,6 +154,19 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
           />
         </FormField>
 
+        <FormField label="Customer Address" id="customerAddress" required>
+          <Input
+            id="customerAddress"
+            type="text"
+            value={formData.customerAddress}
+            onChange={(e) => handleInputChange('customerAddress', e.target.value)}
+            placeholder="Enter customer address"
+            required
+          />
+        </FormField>
+
+        <div></div>
+
         <FormField label="Issue Date" id="issueDate" required>
           <Input
             id="issueDate"
@@ -129,31 +186,6 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
             required
           />
         </FormField>
-
-        <FormField label="Status" id="status">
-          <Select
-            id="status"
-            value={formData.status}
-            onChange={(e) => handleInputChange('status', e.target.value)}
-          >
-            <option value="draft">Draft</option>
-            <option value="pending">Pending</option>
-            <option value="paid">Paid</option>
-            <option value="overdue">Overdue</option>
-          </Select>
-        </FormField>
-
-        <FormField label="Tax Rate (%)" id="taxRate">
-          <Input
-            id="taxRate"
-            type="number"
-            step="0.1"
-            min="0"
-            max="100"
-            value={formData.taxRate}
-            onChange={(e) => handleInputChange('taxRate', parseFloat(e.target.value) || 0)}
-          />
-        </FormField>
       </div>
 
       <div className="space-y-4">
@@ -170,9 +202,9 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
           </Button>
         </div>
 
-        {formData.items.map((item, index) => (
+{formData.items.map((item, index) => (
           <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 border border-gray-200 rounded-lg">
-            <div className="md:col-span-5">
+            <div className="md:col-span-3">
               <FormField label="Product Name" id={`item-${index}-name`} required>
                 <Input
                   id={`item-${index}-name`}
@@ -185,8 +217,20 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
               </FormField>
             </div>
 
-            <div className="md:col-span-2">
-              <FormField label="Quantity" id={`item-${index}-quantity`} required>
+            <div className="md:col-span-4">
+              <FormField label="Description" id={`item-${index}-description`}>
+                <Input
+                  id={`item-${index}-description`}
+                  type="text"
+                  value={item.description}
+                  onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                  placeholder="Enter product description"
+                />
+              </FormField>
+            </div>
+
+            <div className="md:col-span-1">
+              <FormField label="Qty" id={`item-${index}-quantity`} required>
                 <Input
                   id={`item-${index}-quantity`}
                   type="number"
@@ -198,7 +242,7 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
               </FormField>
             </div>
 
-            <div className="md:col-span-3">
+            <div className="md:col-span-2">
               <FormField label="Unit Price" id={`item-${index}-price`} required>
                 <Input
                   id={`item-${index}-price`}
@@ -212,11 +256,45 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
               </FormField>
             </div>
 
-            <div className="md:col-span-2 flex items-end">
+            <div className="md:col-span-1">
+              <FormField label="Discount %" id={`item-${index}-discount`}>
+                <Input
+                  id={`item-${index}-discount`}
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="100"
+                  value={item.discount}
+                  onChange={(e) => handleItemChange(index, 'discount', e.target.value)}
+                />
+              </FormField>
+            </div>
+
+            <div className="md:col-span-1">
+              <FormField label="Tax %" id={`item-${index}-taxRate`}>
+                <Input
+                  id={`item-${index}-taxRate`}
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="100"
+                  value={item.taxRate}
+                  onChange={(e) => handleItemChange(index, 'taxRate', e.target.value)}
+                />
+              </FormField>
+            </div>
+
+            <div className="md:col-span-1 flex items-end justify-between">
               <div className="w-full">
-                <div className="text-sm font-medium text-gray-700 mb-2">Total</div>
+                <div className="text-sm font-medium text-gray-700 mb-2">Amount</div>
                 <div className="text-lg font-semibold text-gray-900">
-                  ${(item.quantity * item.unitPrice).toFixed(2)}
+                  ${(() => {
+                    const lineTotal = item.quantity * item.unitPrice
+                    const discountAmount = lineTotal * (item.discount / 100)
+                    const taxableAmount = lineTotal - discountAmount
+                    const itemTaxAmount = taxableAmount * (item.taxRate / 100)
+                    return (taxableAmount + itemTaxAmount).toFixed(2)
+                  })()}
                 </div>
               </div>
               {formData.items.length > 1 && (
@@ -237,12 +315,12 @@ function CreateInvoiceForm({ onSubmit, onCancel }) {
       <div className="border-t border-gray-200 pt-4">
         <div className="flex justify-end">
           <div className="w-64 space-y-2">
-            <div className="flex justify-between text-sm">
+<div className="flex justify-between text-sm">
               <span className="text-gray-600">Subtotal:</span>
               <span className="font-medium">${subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-600">Tax ({formData.taxRate}%):</span>
+<div className="flex justify-between text-sm">
+              <span className="text-gray-600">Total Tax:</span>
               <span className="font-medium">${taxAmount.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-lg font-semibold border-t border-gray-200 pt-2">

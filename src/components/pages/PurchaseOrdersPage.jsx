@@ -14,13 +14,14 @@ import orderService from '@/services/api/orderService';
 import productService from '@/services/api/productService';
 
 const PurchaseOrdersPage = () => {
-  const [orders, setOrders] = useState([]);
+const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showCreateOrder, setShowCreateOrder] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('all');
-
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOrderDetails, setShowOrderDetails] = useState(false);
   useEffect(() => {
     loadData();
   }, []);
@@ -73,10 +74,23 @@ const PurchaseOrdersPage = () => {
       toast.error('Failed to update order status');
     }
   };
-
-  const filteredOrders = orders.filter(order => 
+const filteredOrders = orders.filter(order => 
     selectedStatus === 'all' || order.status === selectedStatus
   );
+
+  const handleViewOrder = async (orderId) => {
+    try {
+      setLoading(true);
+      const order = await orderService.getById(orderId);
+      setSelectedOrder(order);
+      setShowOrderDetails(true);
+    } catch (error) {
+      console.error('Error fetching order details:', error);
+      toast.error('Failed to load order details');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -138,13 +152,14 @@ const PurchaseOrdersPage = () => {
           actionButton={selectedStatus === 'all' ? { label: 'Create Order', onClick: () => setShowCreateOrder(true) } : null}
         />
       ) : (
-        <PurchaseOrderList
+<PurchaseOrderList
           filteredOrders={filteredOrders}
           handleUpdateOrderStatus={handleUpdateOrderStatus}
+          onViewOrder={handleViewOrder}
         />
       )}
 
-      {showCreateOrder && (
+{showCreateOrder && (
         <Modal
           title="Create Purchase Order"
           onClose={() => setShowCreateOrder(false)}
@@ -155,6 +170,123 @@ const PurchaseOrdersPage = () => {
             onSave={handleCreateOrder}
             onClose={() => setShowCreateOrder(false)}
           />
+        </Modal>
+      )}
+
+      {showOrderDetails && selectedOrder && (
+        <Modal
+          title={`Purchase Order Details - ${selectedOrder.orderNumber}`}
+          onClose={() => {
+            setShowOrderDetails(false);
+            setSelectedOrder(null);
+          }}
+          className="max-w-3xl"
+        >
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Order Information</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Order Number:</span>
+                    <span className="font-medium">{selectedOrder.orderNumber}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Status:</span>
+                    <StatusBadge status={selectedOrder.status} />
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Order Date:</span>
+                    <span>{new Date(selectedOrder.orderDate).toLocaleDateString()}</span>
+                  </div>
+                  {selectedOrder.expectedDate && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Expected Date:</span>
+                      <span>{new Date(selectedOrder.expectedDate).toLocaleDateString()}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Supplier Information</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Supplier ID:</span>
+                    <span>{selectedOrder.supplierId}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Items:</span>
+                    <span>{selectedOrder.items?.length || 0}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Total Value:</span>
+                    <span className="font-medium">
+                      ${selectedOrder.items?.reduce((total, item) => 
+                        total + (item.quantity * (item.unitPrice || 0)), 0
+                      ).toFixed(2) || '0.00'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-gray-900 mb-3">Order Items</h4>
+              <div className="overflow-hidden rounded-lg border border-gray-200">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Product
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Quantity
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Unit Price
+                      </th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Total
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {selectedOrder.items?.map((item, index) => (
+                      <tr key={index}>
+                        <td className="px-4 py-3 text-sm text-gray-900">
+                          {item.productName || `Product ${item.productId}`}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900">
+                          {item.quantity}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-gray-900">
+                          ${item.unitPrice?.toFixed(2) || '0.00'}
+                        </td>
+                        <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                          ${((item.quantity || 0) * (item.unitPrice || 0)).toFixed(2)}
+                        </td>
+                      </tr>
+                    )) || (
+                      <tr>
+                        <td colSpan="4" className="px-4 py-3 text-sm text-gray-500 text-center">
+                          No items found
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {selectedOrder.notes && (
+              <div>
+                <h4 className="font-medium text-gray-900 mb-2">Notes</h4>
+                <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
+                  {selectedOrder.notes}
+                </p>
+              </div>
+            )}
+          </div>
         </Modal>
       )}
     </div>

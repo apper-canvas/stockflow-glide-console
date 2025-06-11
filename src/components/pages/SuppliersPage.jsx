@@ -271,17 +271,34 @@ const SuppliersPage = () => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center">
+<div className="flex justify-between items-center">
           <div className="text-sm text-gray-600">
             Showing {suppliers.length} of {pagination.total} suppliers
           </div>
-          <Button
-            variant="primary"
-            onClick={handleAddSupplier}
-            icon="Plus"
+          <motion.div
+            animate={{ 
+              scale: [1, 1.05, 1],
+              boxShadow: [
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+                "0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.1)",
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+              ]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
           >
-            Add Supplier
-          </Button>
+            <Button
+              variant="primary"
+              onClick={handleAddSupplier}
+              icon="Plus"
+              className="ring-2 ring-blue-200 ring-opacity-50"
+            >
+              Add Supplier
+            </Button>
+          </motion.div>
         </div>
       </div>
 
@@ -314,7 +331,7 @@ const SuppliersPage = () => {
       </AnimatePresence>
 
       {/* Empty State */}
-      {suppliers.length === 0 && !loading && (
+{suppliers.length === 0 && !loading && (
         <div className="text-center py-12">
           <ApperIcon name="Users" size={48} className="mx-auto text-gray-400 mb-4" />
           <h3 className="text-lg font-medium text-gray-900 mb-2">No suppliers found</h3>
@@ -323,9 +340,30 @@ const SuppliersPage = () => {
               ? 'Try adjusting your filters to see more results.'
               : 'Get started by adding your first supplier.'}
           </p>
-          <Button variant="primary" onClick={handleAddSupplier} icon="Plus">
-            Add Supplier
-          </Button>
+          <motion.div
+            animate={{ 
+              scale: [1, 1.05, 1],
+              boxShadow: [
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+                "0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.1)",
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+              ]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <Button 
+              variant="primary" 
+              onClick={handleAddSupplier} 
+              icon="Plus"
+              className="ring-2 ring-blue-200 ring-opacity-50"
+            >
+              Add Supplier
+            </Button>
+          </motion.div>
         </div>
       )}
 

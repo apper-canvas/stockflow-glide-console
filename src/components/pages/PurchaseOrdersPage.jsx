@@ -7,9 +7,9 @@ import Modal from '@/components/molecules/Modal';
 import CreatePurchaseOrderForm from '@/components/organisms/CreatePurchaseOrderForm';
 import AlertMessage from '@/components/atoms/AlertMessage';
 import Spinner from '@/components/atoms/Spinner';
+import StatusBadge from '@/components/atoms/StatusBadge';
 import Button from '@/components/atoms/Button';
 import ApperIcon from '@/components/ApperIcon';
-
 import orderService from '@/services/api/orderService';
 import productService from '@/services/api/productService';
 
